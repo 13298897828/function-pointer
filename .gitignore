@@ -1,32 +1,298 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+#import <Foundation/Foundation.h>
+#import "My.h"
+int main(int argc, const char * argv[]) {
+//    函数:实现某特定功能的代码
+//    函数名与数组名一样是地址
+//    函数指针:指向函数的指针,可以通过函数指针调用指向的函数
+//    printf("%d\n",maxValue(1, 2));
+//    maxValue 类型是int (int ,int)
+//    返回值类型  (*函数指针名) (参数类型) = 函数名
+//    注意  :指针类型必须与指向的数据类型一致   函数指针必须与函数的类型一致
+//    int (*p)(int a,int b) = NULL;
+//    p = maxValue;
+//    用指针调用函数,与使用函数名一样
+//    printf("%d\n",p(1,5));
+//    函数指针的类型: 返回值类型 (*) (参数类型)
+//    void (*p1)();
+//    p1 = printHello;
+//    p1();
+//                             练习:定义两个函数,求最大值和  求和,输入maxValue 或sum 分别堆两个数
+//    p1 = sum;
+//    char name[10] ={0};
+//    int a,b;
+//    scanf("%s%d%d",name,&a,&b);
+//    getchar();
+//    int (*p)(int a,int b) = NULL;
+//    if (strcmp(name, "maxValue")==0) {
+//        p = maxValue;
+//        
+//    }else if (strcmp(name,"sum")==0){
+//        p = sum;
+//    }
+//    if (p != NULL) {
+//        printf("%d\n",p(a,b));
+//    }
+//
+ //   getValue(4, 5, maxValue);
+//    回调过程:在getValue执行过程中,通过传入的参数(函数指针),调用执行某个函数.
+//    回调函数:在函数执行过程中,被函数指针调用的函数
+//    函数回调,调用回调函数的操作
+   
+//     printf("%d\n",getValue(4, 6,maxValue));
+//
+    //练习:  改成高富帅
+    stu stu1 = {"rhgtd",'f',18,818};
+    stu  stu2 = {"fggtd",'a',19,82};
+    stu  stu3 =  {"sdrhgtd",'f',18,988};
+   stu stu[3] = {stu1,stu2,stu3};
+//    getValue1(stu, 3, findAndChange);
+//    getValue1(stu, 3, printXinxi);
+  //  paiXuByNameAsc(stu, 3);
+   //  SortArray p  = NULL;
+    SortArray p = compareStudentByName;
+    
+    sortStudent(stu, 3, p);
+    //    char name[20]={0};
+    //    printf("请输入以什么排序:");
+     //   scanf("%s",name);
+    //    if (strcmp(name, "name")) {
+    //        p = compareStudentByName;
+    //        
+    //    }else if (strcmp(name, "age")){
+    //        p = compareStudentByAge;
+    //    }
+    
+   
+    //字符串和函数名(函数指针)关联列表
+//    functionList list1 = {"name",compareStudentByName};
+//    functionList list2 = {"age",compareStudentByAge};
+//    functionList list3 = {"score",compareStudentByScore};
+//    创建结构体数组.将关联的结构体变量装入数组.
+//    functionList lists[3]={list1,list2,list3};
+//    printf("请输入以什么排序name / age / score:");
+//    char name[10] = {0};    //存输入的字符串
+//    scanf("%s",name);
+//    getchar();
+////    定义一个函数类型的指针,接收接用getFunctionByStringInput函数的返回值
+//    SortArray p1 = NULL;
+//    p1 = getFunctionByStringInput(name, lists, 3);
+//    if (p1 != NULL) {   //真的接收到得话,再排序
+//        sortStudent(stu, 3, p1);
+//        //printXinxi(stu, 3);
+//    }
+//
+//    char name[20];
+//    scanf("%s",name);
+//    getchar();
+//    functionlist a1 = {"name",compareStudentByName};
+//    functionlist a2 = {"age",compareStudentByAge};
+//    functionlist a3 = {"score",compareStudentByScore};
+//    functionlist a[3]= {a1,a2,a3};
+//    SortArray p1 = getfunc(name , a, 3);
+//    sortStudent(stu, 3, p1);
+//    
+//    
+//    
+//    return 0;
+//}
 
-# Precompiled Headers
-*.gch
-*.pch
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+//  my.h
+#import <Foundation/Foundation.h>
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+typedef struct stu{
+    char name[20];
+    char gender;
+    int age;
+    float score;
+}stu;
+typedef BOOL(*SortArray)(stu ,stu);
+//一个函数列表,把字符串和函数名一一对应起来
+//typedef struct functionList{
+//    char name[10];        //字符串,用来和对应的函数指针联系起来
+//    SortArray p_compare;  //不同的 name 对应不同的函数名
+//}functionList;
 
-# Debug files
-*.dSYM/
+int maxValue(int a,int b);
+void printHello();
+int sum(int a,int b);
+int getValue(int a,int b,int (*p)(int ,int ));
+void findAndChange(stu *s1,int n);
+void printXinxi(stu *s1,int n);
+void getValue1(stu *s1,int n,void (*p)(stu *,int));
+void paiXuByAgeAsc(stu *a,int n);
+void paiXuByNameAsc(stu *a,int n);
+void paiXuByScoreAsc(stu *a,int n);
+void getValue2(stu *s1,int n,void (*p)(stu *,int));
+BOOL compareStudentByName(stu s1,stu s2);
+BOOL compareStudentByScore(stu s1,stu s2);
+BOOL compareStudentByAge(stu s1,stu s2);
+void sortStudent(stu *a,int n,SortArray p);
+
+
+
+
+//根据用户输入的字符串返回相应的函数名(函数指针)
+//SortArray getFunctionByStringInput(char *string,functionList *list,int count);//从已经存在的函数列表中查询
+typedef struct functionlist{
+    char name[20];
+    SortArray p_compare;
+    
+}functionlist;
+
+SortArray getfunc(char *string,functionlist *list,int  count);
+
+
+
+
+
+
+
+
+
+my.m
+
+
+
+
+#import "My.h"
+
+int maxValue(int a,int b){
+    return  a > b ?a :b;
+}
+void printHello(){
+    printf("wahaha");
+}
+int sum(int a,int b){
+    return (a + b);
+}
+int getValue(int a,int b,int (*p)(int ,int )){
+ //   p 是一个函数指针,指向哪由我们传入的参数决定的
+
+    
+    return p(a,b);
+}
+void findAndChange(stu *s1,int n){
+    for (int i = 0; i < n ; i ++) {
+        if (((s1+i)->score) >= 90){
+            strcat(((s1+i)->name),"高富帅");
+        }
+    }
+    
+}
+void printXinxi(stu *s1,int n){
+    for (int i = 0; i < n ; i ++) {
+    printf("%s %c   %d, %.2f\n " ,(s1+i)->name,(s1+i)->gender,(s1+i)->age,(s1+i)->score);
+    }
+    
+}
+void getValue1(stu *s1,int n,void (*p)(stu *,int)){
+    
+    p(s1,n);
+   
+}
+
+//void paiXuByAgeAsc(stu *a,int n){
+//    for (int i = 0; i < n- 1;i ++) {
+//        for (int j = 0; i < n - i -1; j ++) {
+//            if ((a[j].age - a[j +1].age)>0) {
+//                stu t = a[j];
+//                a[j] = a[j + 1];
+//                a[j + 1] = t;
+//            }
+//        }
+//    }
+//    for (int i = 0; i < n ; i ++) {
+//        printf("%d \n", a[i].age);
+//    }
+//    
+//}
+//
+//void paiXuByNameAsc(stu *a,int n){
+//    
+//    for (int i = 0; i < n - 1; i ++) {
+//        for (int j = 0; j < n -1- i; j ++) {
+//            if (strcmp(a[j].name, a[j + 1].name)>0) {
+//                stu t;
+//                t= a[j];
+//                a[j] =a[j+1];
+//                a[j +1] =t;
+//            }
+//        }
+//    }
+//    
+//    for (int i = 0; i < n ; i ++) {
+//        printf("%s\n",a[i].name);
+//    }
+//}
+//
+//void paiXuByScoreAsc(stu *a,int n){
+//    
+//    for (int i = 0; i < n - 1; i ++) {
+//        for (int j = 0; i < n - 1 - i; j ++) {
+//            if ((a[j].score -a[j+1].score)>0 ) {
+//                stu t = a[j];
+//                a[j] = a[j+ 1];
+//                a[j+ 1] = t ;
+//            }
+//        }
+//    }
+//    for (int i = 0; i < n; i ++) {
+//        printf("%.2f\n",a[i].score);
+//    }
+//    
+//}
+//比较年龄大小
+BOOL compareStudentByAge(stu s1,stu s2){
+    return s1.age > s2.age;
+}
+//比较姓名大小
+BOOL compareStudentByName(stu s1,stu s2){
+    
+    return strcmp(s1.name, s2.name) > 0;
+}
+//比较分数大小
+BOOL compareStudentByScore(stu s1,stu s2){
+    return s1.score > s2.score;
+}
+// void sortStudent(stu *a,int n,BOOL(*SortArray)(stu ,stu))
+void sortStudent(stu *a,int n,SortArray p){
+    
+    for (int i =  0; i < n - 1; i ++) {
+        for (int j = 0; j < n - 1 -i; j ++) {
+            //函数回调
+            if (p(a[j],a[j+1])) {
+                stu temp = a[j];
+                 a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
+    printXinxi(a,n);
+}
+
+
+//SortArray getFunctionByStringInput(char *string,functionList *list,int count){
+//    for (int i = 0; i < count; i ++) {
+//        if(strcmp(string,list[i].name)==0){
+//            return list[i].p_compare;
+//        }
+//    }
+//    return NULL;   //输入的字符串和列表中的name 不相等. 返回空.
+//}
+
+SortArray getfunc(char *string,functionlist *list,int  count){
+    for (int i = 0; i < count; i ++) {
+        if (strcmp(list[i].name, string) == 0) {
+            
+            return list[i].p_compare;
+        }
+    }
+    return NULL;
+}
+
+
+
+
+    
